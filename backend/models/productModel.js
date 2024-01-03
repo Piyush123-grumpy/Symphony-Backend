@@ -44,7 +44,7 @@ const productSchema = mongoose.Schema({
         default: 0
     },
     price: {
-        type: Number,
+        type: String,
         required: true
     },
     rating: {
@@ -54,7 +54,7 @@ const productSchema = mongoose.Schema({
 
     },
     countInStock: {
-        type: Number,
+        type: String,
         required: true
     },
 

@@ -3,18 +3,22 @@
 import authRoutes from './routes/authRoutes.js'
 import productRoutes from './routes/productRoutes.js'
 import orderRoutes from './routes/orderRoutes.js'
-
+import uploadRoutes from './routes/uploadRoutes.js'
+import { fileURLToPath } from 'url';
 import express, { json, urlencoded as _urlencoded } from 'express'
 import { set, connect } from 'mongoose'
-
 import { config } from 'dotenv'
 import cors from 'cors'
 import path from 'path'
-import { fileURLToPath } from 'url';
 
 
 config()
 
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+const imagesFolderPath = path.join(__dirname, '..', 'images');
 
 
 const app = express()
@@ -67,9 +71,12 @@ connect(dbURI)
 app.use('/', authRoutes)
 app.use('/', productRoutes)
 app.use('/', orderRoutes)
+app.use('/',uploadRoutes)
 app.get('/config/paypal',(req,res)=>{
     res.send(process.env.PAYPAL_CLIENT_ID)
 })
+
+app.use('/images',express.static(path.join(__dirname, '..', '..','..','Symphony Frontend','frontend','src','public','images')))
 
 
 app.use((req, res, next) => {

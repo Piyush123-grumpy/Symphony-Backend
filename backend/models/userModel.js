@@ -12,7 +12,8 @@ const userSchema=mongoose.Schema({
         type:String,
         required:[true,'Please enter a password'],
         unique:false,
-        minlength:[6,'Minimum password length is 6'],
+        minlength:[8,'Minimum password length is 6'],
+        maxlength:[12,'Maximum length is 12']
     },
     email:{
         type:String,
